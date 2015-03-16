@@ -39,7 +39,6 @@ class TestChimp(NereidTestCase):
         self.Site = POOL.get('nereid.website')
         self.Company = POOL.get('company.company')
         self.NereidUser = POOL.get('nereid.user')
-        self.UrlMap = POOL.get('nereid.url_map')
         self.Language = POOL.get('ir.lang')
         self.NereidWebsite = POOL.get('nereid.website')
         self.Party = POOL.get('party.party')
@@ -67,13 +66,6 @@ class TestChimp(NereidTestCase):
         party2, = self.Party.create([{
             'name': 'Guest User',
         }])
-        guest_user, = self.NereidUser.create([{
-            'party': party2.id,
-            'display_name': 'Guest User',
-            'email': 'guest@example.com',
-            'password': 'password',
-            'company': company.id,
-        }])
         party3, = self.Party.create([{
             'name': 'Registered User',
         }])
@@ -86,7 +78,6 @@ class TestChimp(NereidTestCase):
         }])
 
         # Create website
-        url_map, = self.UrlMap.search([], limit=1)
         en_us, = self.Language.search([('code', '=', 'en_US')])
 
         self.locale_en_us, = self.Locale.create([{
@@ -96,8 +87,6 @@ class TestChimp(NereidTestCase):
         }])
         self.NereidWebsite.create([{
             'name': 'localhost',
-            'url_map': url_map.id,
-            'guest_user': guest_user,
             'company': company.id,
             'application_user': USER,
             'default_locale': self.locale_en_us.id,
