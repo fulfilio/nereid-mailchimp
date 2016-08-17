@@ -1,16 +1,9 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!--
-        This file is part of Tryton & Nereid. The COPYRIGHT file at the
-        top level of this repository contains the full copyright notices
-        and license terms.
-    -->
 <tryton>
     <data>
-    
+
         <record model="ir.ui.view" id="inherit_chimp_website_view_form">
             <field name="model">nereid.website</field>
             <field name="inherit" ref="nereid.website_view_form" />
-            <field name="type">form</field>
             <field name="arch" type="xml">
                 <![CDATA[
                 <data>
@@ -20,12 +13,12 @@
                             <field name="mailchimp_api_key"/>
                             <label name="mailchimp_default_list"/>
                             <field name="mailchimp_default_list"/>
-                        </page>     
+                        </page>
                     </xpath>
                 </data>
                 ]]>
             </field>
         </record>
-    
+
     </data>
 </tryton>

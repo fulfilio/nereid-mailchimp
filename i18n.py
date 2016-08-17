@@ -3,8 +3,6 @@
 
     Internationalisation for Nereid
 
-    :copyright: (c) 2010-2012 by Openlabs Technologies & Consulting (P) Ltd.
-    :license: GPLv3, see LICENSE for more details
 
     WARNING: This is incomplete and is under development
 
@@ -74,8 +72,6 @@ def ngettext(singular, plural, n, **variables):
 def make_lazy_gettext(lookup_func):
     """Creates a lazy gettext function dispatches to a gettext
     function as returned by `lookup_func`.
-
-    :copyright: (c) 2010 by Armin Ronacher.
 
     Example:
 

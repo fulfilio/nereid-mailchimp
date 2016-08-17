@@ -4,8 +4,6 @@
 
     MailChimp configuration fields in site
 
-    :copyright: (c) 2010-2014 by Openlabs Technologies & Consulting (P) LTD
-    :license: GPLv3, see LICENSE for more details
 '''
 from trytond.pool import PoolMeta
 from trytond.model import fields

@@ -100,9 +100,9 @@ setup(
     name='trytond_nereid_chimp',
     version=info.get('version', '0.0.1'),
     description="Nereid Integration with MailChimp for newsletter management",
-    author='Openlabs Technologies & Consulting (P) LTD',
-    author_email='info@openlabs.co.in',
-    url='http://www.openlabs.co.in/',
+    author='Fulfil.IO Inc., Openlabs Technologies & Consulting (P) LTD',
+    author_email='info@fulfil.io',
+    url='http://www.fulfil.io/',
     package_dir={'trytond.modules.nereid_chimp': '.'},
     packages=[
         'trytond.modules.nereid_chimp',
@@ -124,7 +124,7 @@ setup(
         'Programming Language :: Python',
         'Topic :: Office/Business',
     ],
-    license='GPL-3',
+    license='BSD',
     install_requires=requires,
     tests_require=[
         'unittest2',

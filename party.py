@@ -2,8 +2,6 @@
 '''
     nereid_mailchimp.party
 
-    :copyright: (c) 2010-2014 by Openlabs Technologies & Consulting (P) LTD
-    :license: GPLv3, see LICENSE for more details
 '''
 import json
 
