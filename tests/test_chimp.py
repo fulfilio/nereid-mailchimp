@@ -8,19 +8,19 @@
 import os
 import sys
 import json
+import unittest
+
+import trytond.tests.test_tryton
+from trytond.tests.test_tryton import (
+    POOL, USER, with_transaction
+)
+from nereid.testing import NereidTestCase
+
 DIR = os.path.abspath(os.path.normpath(os.path.join(
     __file__, '..', '..', '..', '..', '..', 'trytond'
 )))
 if os.path.isdir(DIR):
     sys.path.insert(0, os.path.dirname(DIR))
-import unittest
-
-import trytond.tests.test_tryton
-from trytond.tests.test_tryton import (
-    POOL, USER, DB_NAME, CONTEXT, test_view, test_depends
-)
-from nereid.testing import NereidTestCase
-from trytond.transaction import Transaction
 
 
 class TestChimp(NereidTestCase):
@@ -93,44 +93,32 @@ class TestChimp(NereidTestCase):
             'mailchimp_default_list': 'LN TEST',
         }])
 
-    def test0005views(self):
-        '''
-        Test views.
-        '''
-        test_view('nereid_chimp')
-
-    def test0006depends(self):
-        '''
-        Test depends.
-        '''
-        test_depends()
-
+    @with_transaction()
     def test0010_list_subscription(self):
         '''
         Test if product has all the attributes of variation_attributes.
         '''
-        with Transaction().start(DB_NAME, USER, context=CONTEXT):
-            self.setup_defaults()
+        self.setup_defaults()
 
-            app = self.get_app()
+        app = self.get_app()
 
-            with app.test_client() as c:
-                response = c.get('/mailing-list/subscribe')
-                self.assertEqual(response.status_code, 405)
+        with app.test_client() as c:
+            response = c.get('/mailing-list/subscribe')
+            self.assertEqual(response.status_code, 405)
 
-                response = c.post('/mailing-list/subscribe', data={
-                    'email': 'tb@openlabs.co.in'
-                }, headers=self.xhr_header)
-                self.assertEqual(response.status_code, 409)
-                rv_json = json.loads(response.data)
-                self.assertTrue('already subscribed' in rv_json['message'])
+            response = c.post('/mailing-list/subscribe', data={
+                'email': 'tb@openlabs.co.in'
+            }, headers=self.xhr_header)
+            self.assertEqual(response.status_code, 409)
+            rv_json = json.loads(response.data)
+            self.assertTrue('already subscribed' in rv_json['message'])
 
-                response = c.post('/mailing-list/subscribe', data={
-                    'email': 'tb_do_not_exist@openlabs.co.in'
-                }, headers=self.xhr_header)
-                self.assertEqual(response.status_code, 200)
-                rv_json = json.loads(response.data)
-                self.assertTrue('successfully subscribed' in rv_json['message'])
+            response = c.post('/mailing-list/subscribe', data={
+                'email': 'tb_do_not_exist@openlabs.co.in'
+            }, headers=self.xhr_header)
+            self.assertEqual(response.status_code, 200)
+            rv_json = json.loads(response.data)
+            self.assertTrue('successfully subscribed' in rv_json['message'])
 
 
 def suite():
