@@ -5,7 +5,7 @@
     Implements the view function for subscription
 
 """
-from nereid import request, jsonify, current_app
+from nereid import request, jsonify, current_app, current_website
 
 from chimpy import Connection
 from chimpy.chimpy import ChimpyException
@@ -29,7 +29,7 @@ def list_subscribe():
         'message': A message (Not recommended to be displayed to user)
     }
     """
-    if not request.nereid_website.mailchimp_api_key:
+    if not current_website.mailchimp_api_key:
         current_app.logger.error("nereid-mailchimp No API key")
         return jsonify(
             success=False,
@@ -58,7 +58,7 @@ def list_subscribe():
             merge_vars.update({'FIRST': '', 'LAST': ''})
 
         chimpy_connection = Connection(
-            request.nereid_website.mailchimp_api_key
+            current_website.mailchimp_api_key
         )
 
         mailing_list = request.values['mailing_list'] \
@@ -66,7 +66,7 @@ def list_subscribe():
         if mailing_list is None:
             # If no mailing list was there in the form then use the default one
             lists = chimpy_connection.lists()
-            mailing_list_name = request.nereid_website.mailchimp_default_list
+            mailing_list_name = current_website.mailchimp_default_list
             for each_list in lists:
                 if each_list['name'] == mailing_list_name:
                     mailing_list = each_list['id']
