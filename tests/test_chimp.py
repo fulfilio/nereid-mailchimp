@@ -4,8 +4,6 @@
 
     Test the mailchimp plugin for nereid
 
-    :copyright: (c) 2010-2012 by Openlabs Technologies & Consulting (P) LTD.
-    :license: GPLv3, see LICENSE for more details.
 """
 import os
 import sys

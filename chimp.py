@@ -4,8 +4,6 @@
 
     Implements the view function for subscription
 
-    :copyright: (c) 2011-2014 by Openlabs Technologies & Consulting (P) Limited
-    :license: GPLv3, see LICENSE for more details.
 """
 from nereid import request, jsonify, current_app
 
