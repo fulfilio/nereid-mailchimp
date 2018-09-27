@@ -58,7 +58,7 @@ def list_subscribe():
             merge_vars.update({'FIRST': '', 'LAST': ''})
 
         mailchimp_client = MailChimp(
-            request.nereid_website.mailchimp_api_key
+            current_website.mailchimp_api_key
         )
 
         mailing_list = request.values['mailing_list'] \
@@ -67,7 +67,7 @@ def list_subscribe():
             # If no mailing list was there in the form then use the default one
             mailing_list_name = current_website.mailchimp_default_list
             lists = mailchimp_client.lists.all()
-            mailing_list_name = request.nereid_website.mailchimp_default_list
+            mailing_list_name = current_website.mailchimp_default_list
             for each_list in lists['lists']:
                 if each_list['name'] == mailing_list_name:
                     mailing_list = each_list['id']
